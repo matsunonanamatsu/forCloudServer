@@ -1,4 +1,5 @@
 const fs=require('fs')
+const db=require('../db/index')
 
 exports.forUniApp=(req,res)=>{
   const arr=[
@@ -87,17 +88,10 @@ exports.forUniApp=(req,res)=>{
   res.send(arr.slice(cut,cut+10))
 }
  
-exports.forLate=((req,res)=>{
-  // fs.readFile('./static/lateList.txt','utf-8',(err,data)=>{
-  fs.readFile('./lateList.txt','utf-8',(err,data)=>{
-    if(err) return console.log(err)
-    data=data.split('\r\n')
-    let arr=[]
-    data.forEach((item)=>{
-      let project=item.split(',')[0]
-      let name=item.split(',')[1]
-      arr.push({project,name})
-    })
-    res.send(arr)
+exports.forCloud=(req,res)=>{
+  const sql='select * from matsunonanamatsu.for_cloud'
+  db.query(sql,(err,results)=>{
+    if(err) return res.send(err.message)
+    res.send(results)
   })
-})
+}

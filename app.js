@@ -18,5 +18,5 @@ const testRouter=require('./router/test')
 app.use('/',testRouter)
 
 app.listen(5001,()=>{
-  console.log(`Ctrl+点击进入http://localhost:5001`)
+  console.log(`你的程序在5001端口跑起来啦`)
 })
